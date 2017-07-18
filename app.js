@@ -182,7 +182,7 @@ bot.dialog('/', [
             { listStyle: builder.ListStyle.button });
     },
     function (session, results) {
-        console.log(results.response.entity);
+        
         if (results.response.entity.toLowerCase() == 'crm support' || results.response.entity.toLowerCase() == 'support') {
             session.beginDialog('crmsupport');
         } else if (results.response.entity.toLowerCase() == 'crm training') {
@@ -302,7 +302,7 @@ bot.dialog('crmuser', [
                 }
             });
             //-----
-
+            //session.endDialog();
         } else {
             builder.Prompts.text(session, 'Please select the CMR whitelabel: ');
         }
@@ -334,15 +334,28 @@ function getWhitelabels(callback) {
 bot.dialog('crmsupport',[
     function(session){
         session.say('I can support you for CRM related issues and queries');
-        session.say('Have some frequently asked Questions, please check if you can find your answer');
+        // session.say('Have some frequently asked Questions, please check if you can find your answer');
+        builder.Prompts.text(session, 'Please let me know what you want to ask: ');
 //------
 //====
+    },
+    function(session,results){
+    var tickerNumber = Math.ceil(Math.random() * 20000);
+
+    // Reply and return to parent dialog
+    session.send('Your message \'%s\' was registered. Once we resolve it; we will get back to you.', session.message.text);
+    
+    session.send('Thanks for contacting our support team. Your ticket number is %s.', tickerNumber);
+
+    session.endDialogWithResult({
+        response: tickerNumber
+    });
     }
 ]);
 
 bot.dialog('crmtrainer',[
     function(session){
-        
+
     var card = new builder.HeroCard(session)
             .title('Deposit Process')
             .subtitle('We will guid you to make deposits from CRM and adding amount into your MT4 account')
