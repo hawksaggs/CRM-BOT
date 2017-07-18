@@ -302,7 +302,7 @@ bot.dialog('crmuser', [
                 }
             });
             //-----
-            //session.endDialog();
+            session.endDialog();
         } else {
             builder.Prompts.text(session, 'Please select the CMR whitelabel: ');
         }
@@ -370,6 +370,7 @@ bot.dialog('crmtrainer',[
     // attach the card to the reply message
     var msg = new builder.Message(session).addAttachment(card);
     session.send(msg);
+    session.endDialog();
 //====
     }
 ]);
