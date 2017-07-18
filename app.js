@@ -370,6 +370,34 @@ bot.dialog('crmtrainer',[
     // attach the card to the reply message
     var msg = new builder.Message(session).addAttachment(card);
     session.send(msg);
+
+    var card = new builder.HeroCard(session)
+            .title('Commission')
+            .subtitle('check your commission report from CRM')
+            .text('Commission will be paid everyday from CRM, you can check the transaction details in CRM')
+            .images([
+                builder.CardImage.create(session, 'http://www.grupotaiga.com.br/assets/uploads/z.jpg')
+            ])
+            .buttons([
+                builder.CardAction.openUrl(session, 'https://drive.google.com/file/d/0B0unhSOwQlp-OEprLUs3YzZKRms/view?usp=sharing ', 'Learn More')
+            ]);
+
+    var msg = new builder.Message(session).addAttachment(card);
+    session.send(msg);
+
+
+    var card = new builder.HeroCard(session)
+            .title('Withdrawal')
+            .subtitle('Withdraw your amount from CRM')
+            .text('you can withdraw amount into your bank account,Learn here How to make withdraw request on CRM')
+            .images([
+                builder.CardImage.create(session, 'http://img.cdn2.vietnamnet.vn/Images/english/2012/10/12/07/20121012075408_capital.jpg')
+            ])
+            .buttons([
+                builder.CardAction.openUrl(session, 'https://drive.google.com/file/d/0B0unhSOwQlp-UThPN0NwNURqRmM/view?usp=sharing', 'Learn More')
+            ]);
+    var msg = new builder.Message(session).addAttachment(card);
+    session.send(msg);        
     session.endDialog();
 //====
     }
